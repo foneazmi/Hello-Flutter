@@ -37,6 +37,8 @@ class ListViewHome extends StatelessWidget {
   final listMenu = [
     Menu("Init", "Just a new page", const InitPageRoute()),
     Menu("Text", "playing with text", const TextPageRoute()),
+    Menu("Container", "playing with container", const ContainerPageRoute()),
+    Menu("State", "playing with State", const StatePageRoute()),
   ];
 
   ListViewHome({super.key});
