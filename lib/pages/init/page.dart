@@ -1,5 +1,3 @@
-// import 'package:flutter/material.dart';
-
 part of pages;
 
 class InitPageRoute extends StatelessWidget {

@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: true,
+        // colorSchemeSeed: Colors.green,
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -39,6 +40,8 @@ class ListViewHome extends StatelessWidget {
     Menu("Text", "playing with text", const TextPageRoute()),
     Menu("Container", "playing with container", const ContainerPageRoute()),
     Menu("State", "playing with State", const StatePageRoute()),
+    Menu("Bottom Nav Bar", "Material You 3 Bottom Nav Bar",
+        const BottomNavBarPageRoute()),
   ];
 
   ListViewHome({super.key});

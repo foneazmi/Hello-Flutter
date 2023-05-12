@@ -1,5 +1,3 @@
-// import 'package:flutter/material.dart';
-
 part of pages;
 
 class TextPageRoute extends StatelessWidget {
@@ -16,8 +14,8 @@ class TextPageRoute extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Column(
-                children: const [
+              const Column(
+                children: [
                   Text("just and ordinary text"),
                   Text(
                     "Text with style Bold",
