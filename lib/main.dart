@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hello/pages/pages.dart';
-import 'package:hello/widget/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,9 +54,10 @@ class ListViewHome extends StatelessWidget {
         return Card(
           child: ListTile(
             onTap: () {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.push(context, FadeRoute(page: listMenu[index].page));
-              });
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => listMenu[index].page),
+              );
             },
             title: Text(listMenu[index].title),
             subtitle: Text(listMenu[index].subtitle),
