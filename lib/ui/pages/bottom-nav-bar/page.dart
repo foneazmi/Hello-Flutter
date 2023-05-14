@@ -18,7 +18,7 @@ class _BottomNavBarPageRouteState extends State<BottomNavBarPageRoute> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.pop(true);
           },
           child: const Text('Go back!'),
         ),

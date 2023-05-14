@@ -3,7 +3,7 @@ part of pages;
 class Transition {
   final String title;
   final String subtitle;
-  final PageRouteBuilder page;
+  final Widget page;
   Transition(this.title, this.subtitle, this.page);
 }
 
@@ -34,36 +34,9 @@ class SubTransitionPageRoute extends StatelessWidget {
 class TransitionPageRoute extends StatelessWidget {
   final listTransition = [
     Transition(
-      "FadeRoute",
-      "",
-      FadeRoute(page: const SubTransitionPageRoute(title: 'FadeRoute')),
-    ),
-    Transition(
       "ScaleRotateRoute",
       "",
-      ScaleRotateRoute(
-          page: const SubTransitionPageRoute(title: 'ScaleRotateRoute')),
-    ),
-    Transition(
-      "SizeRoute",
-      "",
-      SizeRoute(page: const SubTransitionPageRoute(title: 'SizeRoute')),
-    ),
-    Transition(
-      "RotationRoute",
-      "",
-      RotationRoute(page: const SubTransitionPageRoute(title: 'RotationRoute')),
-    ),
-    Transition(
-      "ScaleRoute",
-      "",
-      ScaleRoute(page: const SubTransitionPageRoute(title: 'ScaleRoute')),
-    ),
-    Transition(
-      "SlideRightRoute",
-      "",
-      SlideRightRoute(
-          page: const SubTransitionPageRoute(title: 'SlideRightRoute')),
+      const SubTransitionPageRoute(title: 'ScaleRotateRoute'),
     ),
   ];
 
@@ -81,9 +54,15 @@ class TransitionPageRoute extends StatelessWidget {
           return Card(
             child: ListTile(
               onTap: () {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Navigator.push(context, listTransition[index].page);
-                });
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => listTransition[index].page,
+                    transitionDuration: const Duration(seconds: 2),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),
+                );
               },
               title: Text(listTransition[index].title),
               subtitle: Text(listTransition[index].subtitle),
