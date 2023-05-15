@@ -13,6 +13,14 @@ final GoRouter route = GoRouter(
       ),
     ),
     GoRoute(
+      path: '/template',
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+        context: context,
+        state: state,
+        child: const TemplatePageRoute(),
+      ),
+    ),
+    GoRoute(
       path: '/text',
       pageBuilder: (context, state) => buildPageWithFadeTransition(
         context: context,
@@ -50,6 +58,22 @@ final GoRouter route = GoRouter(
         context: context,
         state: state,
         child: TransitionPageRoute(),
+      ),
+    ),
+    GoRoute(
+      path: '/http',
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+        context: context,
+        state: state,
+        child: const HttpPageRoute(),
+      ),
+    ),
+    GoRoute(
+      path: '/http-crud',
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+        context: context,
+        state: state,
+        child: const HttpCrudPageRoute(),
       ),
     ),
   ],
