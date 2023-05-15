@@ -55,7 +55,7 @@ class _HttpCrudAddPageRouteState extends State<HttpCrudAddPageRoute> {
                       try {
                         pbKhanService.addNote(body).then((ok) {
                           if (ok) {
-                            context.pop();
+                            context.replace('/http-crud');
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(

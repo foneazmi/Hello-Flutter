@@ -24,7 +24,7 @@ class _HttpCrudPageRouteState extends State<HttpCrudPageRoute> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () => context.push('/http-crud/add'),
+            onPressed: () => context.replace('/http-crud/add'),
           ),
         ],
       ),
