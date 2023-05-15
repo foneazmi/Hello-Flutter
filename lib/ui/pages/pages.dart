@@ -14,4 +14,8 @@ part 'package:hello/ui/pages/state/page.dart';
 part 'package:hello/ui/pages/bottom-nav-bar/page.dart';
 part 'package:hello/ui/pages/transition/page.dart';
 part 'package:hello/ui/pages/http/page.dart';
+
+///
 part 'package:hello/ui/pages/http-crud/page.dart';
+part 'package:hello/ui/pages/http-crud/add.dart';
+///

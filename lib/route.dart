@@ -76,5 +76,13 @@ final GoRouter route = GoRouter(
         child: const HttpCrudPageRoute(),
       ),
     ),
+    GoRoute(
+      path: '/http-crud/add',
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+        context: context,
+        state: state,
+        child: const HttpCrudAddPageRoute(),
+      ),
+    ),
   ],
 );
