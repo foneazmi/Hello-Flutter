@@ -8,12 +8,12 @@ class HttpCrudPageRoute extends StatefulWidget {
 }
 
 class _HttpCrudPageRouteState extends State<HttpCrudPageRoute> {
-  late Future<List<Note>> notes;
+  NoteCubit noteCubit = NoteCubit();
 
   @override
   void initState() {
+    noteCubit.getAllNotes();
     super.initState();
-    notes = PBKhanService().getNotes();
   }
 
   @override
@@ -24,34 +24,48 @@ class _HttpCrudPageRouteState extends State<HttpCrudPageRoute> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () => context.replace('/http-crud/add'),
+            onPressed: () => context.push('/http-crud/add'),
           ),
         ],
       ),
       body: SafeArea(
-        child: FutureBuilder<List<Note>>(
-          future: notes,
-          builder: (context, snapshot) {
-            if (snapshot.hasData &&
-                snapshot.connectionState == ConnectionState.done) {
-              return _buildListView(snapshot.data!);
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  "Something wrong with message: ${snapshot.error.toString()}",
-                ),
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+        child: BlocProvider(
+          create: (_) => noteCubit,
+          child: BlocListener<NoteCubit, NoteState>(
+            listener: (context, state) {
+              print(state);
+              if (state is ErrorNoteState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                  ),
+                );
+              } else if (state is SuccessSubmitNoteState) {
+                noteCubit.getAllNotes();
+              }
+            },
+            child: BlocBuilder<NoteCubit, NoteState>(
+              builder: (context, state) {
+                if (state is LoadingNoteState) {
+                  return _buildLoading();
+                } else if (state is SuccessLoadAllNoteState) {
+                  return _buildCard(state.notes);
+                } else if (state is ErrorNoteState) {
+                  return Container();
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildListView(List<Note> notes) {
+  Widget _buildLoading() => const Center(child: CircularProgressIndicator());
+
+  Widget _buildCard(List<Note> notes) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ListView.builder(
@@ -70,13 +84,13 @@ class _HttpCrudPageRouteState extends State<HttpCrudPageRoute> {
                       note.title,
                     ),
                     Text(note.content),
-                    // Text(note.created),
-                    // Text(note.updated),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            noteCubit.deleteNote(notes[index].id);
+                          },
                           child: const Text(
                             "Delete",
                             style: TextStyle(color: Colors.red),

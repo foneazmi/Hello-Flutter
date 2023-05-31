@@ -25,4 +25,14 @@ class PBKhanService {
       return false;
     }
   }
+
+  Future<bool> deleteNote(id) async {
+    final response = await http
+        .delete(Uri.parse('$baseUrl/api/collections/notes/records/$id'));
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

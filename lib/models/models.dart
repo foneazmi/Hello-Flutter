@@ -1,6 +1,5 @@
 library models;
 
-import 'dart:async';
 import 'dart:convert';
 
 part 'package:hello/models/api-khan/response.dart';

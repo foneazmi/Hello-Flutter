@@ -1,7 +1,5 @@
 part of pages;
 
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
 class HttpCrudAddPageRoute extends StatefulWidget {
   const HttpCrudAddPageRoute({super.key});
 
@@ -10,126 +8,110 @@ class HttpCrudAddPageRoute extends StatefulWidget {
 }
 
 class _HttpCrudAddPageRouteState extends State<HttpCrudAddPageRoute> {
-  bool _isLoading = false;
-  PBKhanService pbKhanService = PBKhanService();
-  bool _isFieldNameValid = true;
-  bool _isFieldEmailValid = true;
-  final TextEditingController _controllerTitle = TextEditingController();
-  final TextEditingController _controllerContent = TextEditingController();
+  NoteCubit noteCubit = NoteCubit();
+  final formState = GlobalKey<FormState>();
+  final focusNodeButtonSubmit = FocusNode();
+  var controllerTitle = TextEditingController();
+  var controllerContent = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldState,
       appBar: AppBar(
-        title: const Text('Template Page'),
+        title: const Text('Add Note'),
       ),
-      body: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _buildTextFieldTitle(),
-                _buildTextFieldContent(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      String content = _controllerTitle.text.toString();
-                      String title = _controllerContent.text.toString();
-                      if (!content.isNotEmpty || !title.isNotEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Please fill all field"),
-                          ),
-                        );
-                        return;
-                      }
-                      setState(() => _isLoading = true);
-                      var body = <String, dynamic>{
-                        "title": title,
-                        "content": content
-                      };
-                      try {
-                        pbKhanService.addNote(body).then((ok) {
-                          if (ok) {
-                            context.replace('/http-crud');
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Submit data failed"),
-                              ),
-                            );
-                          }
-                        });
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Submit data failed"),
-                          ),
-                        );
-                      } finally {
-                        setState(() => _isLoading = false);
-                      }
-                    },
-                    child: Text("Submit".toUpperCase()),
-                  ),
-                )
-              ],
-            ),
+      body: BlocProvider<NoteCubit>(
+        create: (_) => noteCubit,
+        child: BlocListener<NoteCubit, NoteState>(
+          listener: (_, state) {
+            if (state is ErrorNoteState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage),
+                ),
+              );
+            } else if (state is SuccessSubmitNoteState) {
+              context.pop();
+            }
+          },
+          child: Stack(
+            children: [
+              _buildWidgetForm(),
+              _buildWidgetLoading(),
+            ],
           ),
-          _isLoading
-              ? const Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.3,
-                      child: ModalBarrier(
-                        dismissible: false,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ],
-                )
-              : Container(),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildTextFieldTitle() {
-    return TextField(
-      controller: _controllerTitle,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        labelText: "Title",
-        errorText: _isFieldNameValid ? null : "Full name is required",
+  Widget _buildWidgetForm() {
+    return Form(
+      key: formState,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: controllerTitle,
+              decoration: const InputDecoration(labelText: 'Title'),
+              validator: (value) {
+                return value == null || value.isEmpty ? 'Enter a title' : null;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            TextFormField(
+              controller: controllerContent,
+              decoration: const InputDecoration(labelText: 'Content'),
+              validator: (value) {
+                debugPrint('value content: $value');
+                return value == null || value.isEmpty ? 'Enter content' : null;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                focusNode: focusNodeButtonSubmit,
+                onPressed: () {
+                  focusNodeButtonSubmit.requestFocus();
+                  var title = controllerTitle.text.trim();
+                  var content = controllerContent.text.trim();
+                  var body = <String, dynamic>{
+                    "title": title,
+                    "content": content
+                  };
+                  noteCubit.addNote(body);
+                },
+                child: const Text(
+                  "Add",
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldNameValid) {
-          setState(() => _isFieldNameValid = isFieldValid);
-        }
-      },
     );
   }
 
-  Widget _buildTextFieldContent() {
-    return TextField(
-      controller: _controllerContent,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        labelText: "Content",
-        errorText: _isFieldEmailValid ? null : "Email is required",
-      ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldEmailValid) {
-          setState(() => _isFieldEmailValid = isFieldValid);
+  Widget _buildWidgetLoading() {
+    return BlocBuilder<NoteCubit, NoteState>(
+      builder: (_, state) {
+        if (state is LoadingNoteState) {
+          return Container(
+            color: Colors.black.withOpacity(.5),
+            width: double.infinity,
+            height: double.infinity,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else {
+          return Container();
         }
       },
     );
