@@ -1,6 +1,6 @@
 part of services;
 
-class PBKhanService {
+class PocketBaseService {
   final String baseUrl = "https://pb.khan.my.id";
   Future<List<Note>> getNotes() async {
     final response =

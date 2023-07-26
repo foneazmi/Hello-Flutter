@@ -1,13 +1,13 @@
 part of pages;
 
-class StatePageRoute extends StatefulWidget {
-  const StatePageRoute({Key? key}) : super(key: key);
+class StatePage extends StatefulWidget {
+  const StatePage({Key? key}) : super(key: key);
 
   @override
-  State<StatePageRoute> createState() => _StatePageRouteState();
+  State<StatePage> createState() => _StatePageState();
 }
 
-class _StatePageRouteState extends State<StatePageRoute> {
+class _StatePageState extends State<StatePage> {
   int number = 0;
   @override
   Widget build(BuildContext context) {

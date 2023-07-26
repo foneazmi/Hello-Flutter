@@ -1,12 +1,12 @@
 part of pages;
 
-class BottomNavBarPageRoute extends StatefulWidget {
-  const BottomNavBarPageRoute({super.key});
+class BottomNavBarPage extends StatefulWidget {
+  const BottomNavBarPage({super.key});
   @override
-  State<BottomNavBarPageRoute> createState() => _BottomNavBarPageRouteState();
+  State<BottomNavBarPage> createState() => _BottomNavBarPageState();
 }
 
-class _BottomNavBarPageRouteState extends State<BottomNavBarPageRoute> {
+class _BottomNavBarPageState extends State<BottomNavBarPage> {
   int page = 0;
 
   @override
@@ -18,9 +18,9 @@ class _BottomNavBarPageRouteState extends State<BottomNavBarPageRoute> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.pop(true);
+            Get.back();
           },
-          child: const Text('Go back!'),
+          child: const Text('Back!'),
         ),
       ),
       bottomNavigationBar: NavigationBar(

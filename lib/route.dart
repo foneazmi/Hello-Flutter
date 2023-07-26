@@ -1,90 +1,12 @@
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:hello/ui/pages/pages.dart';
-import 'package:hello/ui/widget/widgets.dart';
 
-final GoRouter route = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const InitPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/template',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const TemplatePageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/text',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const TextPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/container',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const ContainerPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/state',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const StatePageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/bottom-nav-bar',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const BottomNavBarPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/transition',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: TransitionPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/http',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const HttpPageRoute(),
-      ),
-    ),
-    GoRoute(
-      path: '/http-crud',
-      pageBuilder: (context, state) => buildPageWithFadeTransition(
-        context: context,
-        state: state,
-        child: const HttpCrudPageRoute(),
-      ),
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'add',
-          pageBuilder: (context, state) => buildPageWithFadeTransition(
-            context: context,
-            state: state,
-            child: const HttpCrudAddPageRoute(),
-          ),
-        ),
-      ],
-    ),
-  ],
-);
+final getPages = [
+  GetPage(name: '/', page: () => const InitPage()),
+  GetPage(name: '/template', page: () => const TemplatePage()),
+  GetPage(name: '/text', page: () => const TextPage()),
+  GetPage(name: '/container', page: () => const ContainerPage()),
+  GetPage(name: '/state', page: () => const StatePage()),
+  GetPage(name: '/bottom-nav-bar', page: () => const BottomNavBarPage()),
+  GetPage(name: '/http', page: () => const HttpPage()),
+];

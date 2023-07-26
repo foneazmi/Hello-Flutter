@@ -1,19 +1,20 @@
 part of pages;
 
-class HttpPageRoute extends StatefulWidget {
-  const HttpPageRoute({super.key});
+class HttpPage extends StatefulWidget {
+  const HttpPage({super.key});
 
   @override
-  State<HttpPageRoute> createState() => _HttpPageRouteState();
+  State<HttpPage> createState() => _HttpPageState();
 }
 
-class _HttpPageRouteState extends State<HttpPageRoute> {
-  late Future<HelloResponse> hello;
+class _HttpPageState extends State<HttpPage> {
+  late Future hello;
 
   @override
   void initState() {
     super.initState();
-    hello = HttpService().getHello();
+    // hello = HttpService().getHello();
+    // print(hello);
   }
 
   @override
@@ -23,18 +24,18 @@ class _HttpPageRouteState extends State<HttpPageRoute> {
         title: const Text('Http Page'),
       ),
       body: Center(
-        child: FutureBuilder<HelloResponse>(
-          future: hello,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data!.hello);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-            return const CircularProgressIndicator();
-          },
-        ),
-      ),
+          // child: FutureBuilder(
+          //   future: hello,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return Text(snapshot.data!.hello);
+          //     } else if (snapshot.hasError) {
+          //       return Text('${snapshot.error}');
+          //     }
+          //     return const CircularProgressIndicator();
+          //   },
+          // ),
+          ),
     );
   }
 }

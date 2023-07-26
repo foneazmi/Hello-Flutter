@@ -1,7 +1,7 @@
 part of pages;
 
-class InitPageRoute extends StatelessWidget {
-  const InitPageRoute({super.key});
+class InitPage extends StatelessWidget {
+  const InitPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ListViewHome extends StatelessWidget {
     Menu("Bottom Nav Bar", "Material You 3 Bottom Nav Bar", "/bottom-nav-bar"),
     // Menu("Transition", "Animated Transition", "/transition"),
     Menu("HTTP", "flutter pub add http", "/http"),
-    Menu("HTTP CRUD", "Crud using HTTP", "/http-crud"),
+    // Menu("HTTP CRUD", "Crud using HTTP", "/http-crud"),
   ];
 
   ListViewHome({super.key});
@@ -42,7 +42,7 @@ class ListViewHome extends StatelessWidget {
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
-            onTap: () => context.push(listMenu[index].routeName),
+            onTap: () => Get.toNamed(listMenu[index].routeName),
             title: Text(listMenu[index].title),
             subtitle: Text(listMenu[index].subtitle),
             trailing: const Icon(Icons.arrow_right_rounded),

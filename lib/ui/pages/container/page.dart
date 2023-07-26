@@ -1,7 +1,7 @@
 part of pages;
 
-class ContainerPageRoute extends StatelessWidget {
-  const ContainerPageRoute({super.key});
+class ContainerPage extends StatelessWidget {
+  const ContainerPage({super.key});
 
   @override
   Widget build(BuildContext context) {
