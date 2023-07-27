@@ -9,9 +9,7 @@ class TemplatePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Template Page'),
       ),
-      body: const Center(
-        child: Text("Template"),
-      ),
+      body: const TemplateScreen(),
     );
   }
 }

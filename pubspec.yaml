@@ -33,6 +33,7 @@ dependencies:
   flutter:
     sdk: flutter
   get:
+  pocketbase: ^0.10.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

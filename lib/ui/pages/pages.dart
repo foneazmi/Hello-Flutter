@@ -4,10 +4,11 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hello/controllers/controllers.dart';
+import 'package:hello/ui/screens/screens.dart';
 
 part 'package:hello/ui/pages/bottom_nav_bar/page.dart';
 part 'package:hello/ui/pages/container/page.dart';
+part 'package:hello/ui/pages/crud/page.dart';
 part 'package:hello/ui/pages/http/page.dart';
 part 'package:hello/ui/pages/init/page.dart';
 part 'package:hello/ui/pages/state/page.dart';

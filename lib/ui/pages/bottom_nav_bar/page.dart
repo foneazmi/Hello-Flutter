@@ -12,14 +12,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: const Text('Back!'),
-        ),
-      ),
+      body: const BottomNavBarScreen(),
       bottomNavigationBar: NavigationBar(
         selectedIndex: page,
         onDestinationSelected: (int index) {
