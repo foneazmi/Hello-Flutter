@@ -22,16 +22,13 @@ class Menu {
 }
 
 class ListViewHome extends StatelessWidget {
-  //? Add here if there new menu
   final listMenu = [
     Menu("Template", "cp -r template <page_name>", "/template"),
     Menu("Text", "playing with text", '/text'),
     Menu("Container", "playing with container", '/container'),
     Menu("State", "playing with State", "/state"),
     Menu("Bottom Nav Bar", "Material You 3 Bottom Nav Bar", "/bottom-nav-bar"),
-    // Menu("Transition", "Animated Transition", "/transition"),
-    Menu("HTTP", "flutter pub add http", "/http"),
-    // Menu("HTTP CRUD", "Crud using HTTP", "/http-crud"),
+    Menu("HTTP", "use getConnect", "/http"),
   ];
 
   ListViewHome({super.key});

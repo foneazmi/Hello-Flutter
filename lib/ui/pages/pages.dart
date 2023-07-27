@@ -4,10 +4,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hello/models/models.dart';
-import 'package:hello/services/services.dart';
+import 'package:hello/controllers/controllers.dart';
 
-part 'package:hello/ui/pages/bottom-nav-bar/page.dart';
+part 'package:hello/ui/pages/bottom_nav_bar/page.dart';
 part 'package:hello/ui/pages/container/page.dart';
 part 'package:hello/ui/pages/http/page.dart';
 part 'package:hello/ui/pages/init/page.dart';

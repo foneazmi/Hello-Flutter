@@ -12,9 +12,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      // title: const Text('Bottom Nav Bar'),
-      // ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {

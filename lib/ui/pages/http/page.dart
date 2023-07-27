@@ -10,11 +10,13 @@ class HttpPage extends StatefulWidget {
 class _HttpPageState extends State<HttpPage> {
   late Future hello;
 
+  final data = Get.put(HttpController());
+
   @override
   void initState() {
     super.initState();
-    // hello = HttpService().getHello();
-    // print(hello);
+    //? already called when init HttpController
+    // data.hello();
   }
 
   @override
@@ -24,18 +26,22 @@ class _HttpPageState extends State<HttpPage> {
         title: const Text('Http Page'),
       ),
       body: Center(
-          // child: FutureBuilder(
-          //   future: hello,
-          //   builder: (context, snapshot) {
-          //     if (snapshot.hasData) {
-          //       return Text(snapshot.data!.hello);
-          //     } else if (snapshot.hasError) {
-          //       return Text('${snapshot.error}');
-          //     }
-          //     return const CircularProgressIndicator();
-          //   },
-          // ),
-          ),
+        child: Obx(
+          () {
+            if (data.isLoading.value == true) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            } else if (data.isError.value.isNotEmpty) {
+              return Center(
+                child: Text(data.isError.value),
+              );
+            } else {
+              return Center(
+                child: Text(data.result.value),
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 }

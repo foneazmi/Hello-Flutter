@@ -12,7 +12,6 @@ class ContainerPage extends StatelessWidget {
       body: Container(
         color: Colors.red,
         margin: const EdgeInsets.all(10.0),
-        // padding: const EdgeInsets.all(10.0),
         child: Container(
           margin: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
