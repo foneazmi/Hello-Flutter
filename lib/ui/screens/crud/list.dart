@@ -11,6 +11,12 @@ class _CrudScreenState extends State<CrudScreen> {
   final data = Get.put(CrudController());
 
   @override
+  void initState() {
+    super.initState();
+    data.getList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Obx(
@@ -20,6 +26,10 @@ class _CrudScreenState extends State<CrudScreen> {
           } else if (data.isError.value.isNotEmpty) {
             return Center(
               child: Text(data.isError.value),
+            );
+          } else if (data.result.isEmpty) {
+            return const Center(
+              child: Text("No data"),
             );
           } else {
             return Padding(
@@ -45,7 +55,7 @@ class _CrudScreenState extends State<CrudScreen> {
                               children: <Widget>[
                                 ElevatedButton(
                                   onPressed: () {
-                                    data.delete('${parsedJson["id"]}');
+                                    data.deleteData('${parsedJson["id"]}');
                                   },
                                   child: const Text(
                                     "Delete",
@@ -54,7 +64,10 @@ class _CrudScreenState extends State<CrudScreen> {
                                 ),
                                 const SizedBox(width: 8.0),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.toNamed('/crud/edit',
+                                        arguments: parsedJson);
+                                  },
                                   child: const Text(
                                     "Edit",
                                     style: TextStyle(color: Colors.blue),

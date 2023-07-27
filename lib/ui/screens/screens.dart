@@ -9,7 +9,11 @@ import 'package:hello/controllers/controllers.dart';
 
 part 'package:hello/ui/screens/bottom_nav_bar/screen.dart';
 part 'package:hello/ui/screens/container/screen.dart';
-part 'package:hello/ui/screens/crud/screen.dart';
+//
+part 'package:hello/ui/screens/crud/add.dart';
+part 'package:hello/ui/screens/crud/edit.dart';
+part 'package:hello/ui/screens/crud/list.dart';
+//
 part 'package:hello/ui/screens/http/screen.dart';
 part 'package:hello/ui/screens/init/screen.dart';
 part 'package:hello/ui/screens/state/screen.dart';

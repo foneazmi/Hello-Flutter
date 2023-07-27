@@ -8,6 +8,8 @@ final getPages = [
   GetPage(name: '/container', page: () => const ContainerPage()),
   GetPage(name: '/state', page: () => const StatePage()),
   GetPage(name: '/bottom-nav-bar', page: () => const BottomNavBarPage()),
-  GetPage(name: '/http', page: () => HttpPage()),
+  GetPage(name: '/http', page: () => const HttpPage()),
+  GetPage(name: '/crud/add', page: () => const CrudAddPage()),
+  GetPage(name: '/crud/edit', page: () => const CrudEditPage()),
   GetPage(name: '/crud', page: () => const CrudPage()),
 ];
