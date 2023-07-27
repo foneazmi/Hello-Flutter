@@ -38,13 +38,14 @@ class _CrudScreenState extends State<CrudScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('${parsedJson.title}'),
+                            Text('${parsedJson["title"]}'),
+                            Text('${parsedJson["description"]}'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 ElevatedButton(
                                   onPressed: () {
-                                    // noteCubit.deleteNote(notes[index].id);
+                                    data.delete('${parsedJson["id"]}');
                                   },
                                   child: const Text(
                                     "Delete",

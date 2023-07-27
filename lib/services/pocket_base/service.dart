@@ -10,4 +10,8 @@ class PocketBaseService {
         );
     return resultList.items;
   }
+
+  Future delete(collectionName, id) async {
+    await pb.collection(collectionName).delete(id);
+  }
 }

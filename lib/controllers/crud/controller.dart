@@ -7,7 +7,7 @@ class CrudController extends GetxController {
   var isError = "".obs;
   var result = [].obs;
 
-  hello() async {
+  list() async {
     isLoading.value = true;
     try {
       var res = await service.list("notes");
@@ -19,9 +19,20 @@ class CrudController extends GetxController {
     }
   }
 
+  delete(id) async {
+    isLoading.value = true;
+    try {
+      await service.delete("notes", id);
+      list();
+    } catch (e) {
+      isLoading.value = false;
+      isError.value = e.toString();
+    }
+  }
+
   @override
   void onInit() {
-    hello();
+    list();
     super.onInit();
   }
 }
